@@ -1,6 +1,6 @@
 Will be updated
 <br>
 Enter your own Cloudinary information
-<img src="https://user-images.githubusercontent.com/55664312/130350474-40a3ef04-36a4-4bb2-859d-274dcd4d69dc.png">
+<img src="https://user-images.githubusercontent.com/55664312/130350611-628dd425-7754-4e72-94bf-4733348a4156.png">
 
 
