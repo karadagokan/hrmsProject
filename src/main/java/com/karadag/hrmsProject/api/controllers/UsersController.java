@@ -1,7 +1,7 @@
 package com.karadag.hrmsProject.api.controllers;
 
 import com.karadag.hrmsProject.business.abstracts.UsersService;
-import com.karadag.hrmsProject.entities.concretes.Users;
+import com.karadag.hrmsProject.core.entities.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +14,13 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UsersController {
 
-    @Autowired
+
     UsersService usersService;
+
+    @Autowired
+    public UsersController(UsersService usersService) {
+        this.usersService = usersService;
+    }
 
     @GetMapping("/getAll")
     public List<Users> getAll() {

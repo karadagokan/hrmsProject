@@ -9,20 +9,26 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/employer")
 public class EmployerController {
 
-    @Autowired
+
     EmployerService employerService;
 
+    @Autowired
+    public EmployerController(EmployerService employerService) {
+        this.employerService = employerService;
+    }
+
     @GetMapping("/getAll")
-    public DataResult<List<Employer>> getAll(){
+    public DataResult<List<Employer>> getAll() {
         return employerService.getAll();
     }
 
     @PostMapping(value = "/addNew")
-    public Result addEmployer(@RequestBody  Employer employer){
+    public Result addEmployer(@RequestBody Employer employer) {
         return employerService.addEmployer(employer);
     }
 }

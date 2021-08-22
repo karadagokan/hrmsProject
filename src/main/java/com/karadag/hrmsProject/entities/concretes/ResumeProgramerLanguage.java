@@ -1,10 +1,10 @@
 package com.karadag.hrmsProject.entities.concretes;
 
-import javax.persistence.Embeddable;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Embeddable;
 
 @Data
 @NoArgsConstructor
@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class ResumeProgramerLanguage {
 
-	private String languageName;
+    private String languageName;
 }

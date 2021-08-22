@@ -1,18 +1,17 @@
 package com.karadag.hrmsProject.core.concretes;
 
 import com.karadag.hrmsProject.core.abstracts.JobSeekerCheckService;
-import com.karadag.hrmsProject.entities.concretes.JobSeeker;
 
 public class JobSeekerCheckManager implements JobSeekerCheckService {
 
-	JobSeekerCheckService jobSeekerCheckService;
+    JobSeekerCheckService jobSeekerCheckService;
 
-	public JobSeekerCheckManager(JobSeekerCheckService jobSeekerCheckService) {
-		this.jobSeekerCheckService = jobSeekerCheckService;
-	}
+    public JobSeekerCheckManager(JobSeekerCheckService jobSeekerCheckService) {
+        this.jobSeekerCheckService = jobSeekerCheckService;
+    }
 
-	@Override
-	public boolean ifRealPerson(String firstName, String lastName, String nationalityId, String yearOfBirth) {
-		return jobSeekerCheckService.ifRealPerson(firstName, lastName, nationalityId, yearOfBirth);
-	}
+    @Override
+    public boolean ifRealPerson(String firstName, String lastName, String nationalityId, String yearOfBirth) {
+        return jobSeekerCheckService.ifRealPerson(firstName, lastName, nationalityId, yearOfBirth);
+    }
 }

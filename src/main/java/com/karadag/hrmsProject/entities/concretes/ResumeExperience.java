@@ -1,12 +1,11 @@
 package com.karadag.hrmsProject.entities.concretes;
 
-import java.util.Date;
-
-import javax.persistence.Embeddable;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Embeddable;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor

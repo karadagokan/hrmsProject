@@ -4,9 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,34 +14,38 @@ import javax.persistence.*;
 @Table(name = "Resumes")
 public class Resume {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int resumeId;
-	
-	@ElementCollection
-	@CollectionTable(name = "jobSeekerSchools", joinColumns = @JoinColumn(name = "resumeId"))
-	private List<ResumeSchool> resumeSchools;
-	
-	@ElementCollection
-	@CollectionTable(name="jobExperience",joinColumns = @JoinColumn(name="resumeId"))
-	private List<ResumeExperience> experiences;
-	
-	@ElementCollection
-	@CollectionTable(name="jobSeekerLanguage",joinColumns = @JoinColumn(name="resumeId"))
-	private List<ResumeLanguage> resumeLanguages;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int resumeId;
 
-	private String githubLink;
+    @ElementCollection
+    @CollectionTable(name = "jobSeekerSchools", joinColumns = @JoinColumn(name = "resumeId"))
+    private List<ResumeSchool> resumeSchools;
 
-	private String linkedinLink;
+    @ElementCollection
+    @CollectionTable(name = "jobExperience", joinColumns = @JoinColumn(name = "resumeId"))
+    private List<ResumeExperience> experiences;
 
-	private String photografLink;
+    @ElementCollection
+    @CollectionTable(name = "jobSeekerLanguage", joinColumns = @JoinColumn(name = "resumeId"))
+    private List<ResumeLanguage> resumeLanguages;
 
-	private String coverLetter;
+    @Lob //Uzun string değerler için kullanılır
+    private String githubLink;
 
-	@Column(nullable = false)
-	private int emplooyeId;
+    @Lob
+    private String linkedinLink;
 
-	@ManyToMany(mappedBy = "resumes")// Mapped by olan kısım tablonun sağdaki kismıdır. Yani inverseJoin dediğimiz.
-	private List<Advertisement> advertisement;
+    @Lob
+    private String photografLink;
+
+    @Lob
+    private String coverLetter;
+
+    @Column(nullable = false)
+    private int emplooyeId;
+
+    @ManyToMany(mappedBy = "resumes")// Mapped by olan kısım tablonun sağdaki kismıdır. Yani inverseJoin dediğimiz.
+    private List<Advertisement> advertisement;
 
 }

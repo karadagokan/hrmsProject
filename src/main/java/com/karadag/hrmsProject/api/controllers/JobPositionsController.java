@@ -13,8 +13,13 @@ import java.util.List;
 @RequestMapping("/api/jobPositions")
 public class JobPositionsController {
 
-    @Autowired
+
     JobPositionsService jobPositionsService;
+
+    @Autowired
+    public JobPositionsController(JobPositionsService jobPositionsService) {
+        this.jobPositionsService = jobPositionsService;
+    }
 
     @GetMapping("/getAll")
     public DataResult<List<JobPosition>> getAll() {

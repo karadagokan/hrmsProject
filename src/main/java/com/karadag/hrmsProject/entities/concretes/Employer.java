@@ -1,5 +1,6 @@
 package com.karadag.hrmsProject.entities.concretes;
 
+import com.karadag.hrmsProject.core.entities.Users;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,7 @@ public class Employer extends Users {
     @Column(name = "website", nullable = false)
     private String website;
 
-    @OneToOne(mappedBy = "employer",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "employer", cascade = CascadeType.ALL)
     private HrmsValidation hrmsValidation;
 
     @OneToMany(mappedBy = "employer")

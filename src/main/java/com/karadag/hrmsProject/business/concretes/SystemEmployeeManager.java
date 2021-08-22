@@ -2,9 +2,9 @@ package com.karadag.hrmsProject.business.concretes;
 
 import com.karadag.hrmsProject.business.abstracts.SystemEmployeeService;
 import com.karadag.hrmsProject.core.concretes.CheckRegisterRullers;
+import com.karadag.hrmsProject.core.dataAccess.UsersDao;
 import com.karadag.hrmsProject.core.utilities.*;
 import com.karadag.hrmsProject.dataAccess.abstracts.SystemEmployeeDao;
-import com.karadag.hrmsProject.dataAccess.abstracts.UsersDao;
 import com.karadag.hrmsProject.entities.concretes.SystemEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,15 +14,14 @@ import java.util.List;
 @Service
 public class SystemEmployeeManager implements SystemEmployeeService {
 
-
-    @Autowired
     UsersDao usersDao;
 
     SystemEmployeeDao systemEmployeeDao;
 
     @Autowired
-    public SystemEmployeeManager(SystemEmployeeDao systemEmployeeDao) {
+    public SystemEmployeeManager(SystemEmployeeDao systemEmployeeDao, UsersDao usersDao) {
         this.systemEmployeeDao = systemEmployeeDao;
+        this.usersDao = usersDao;
     }
 
     @Override

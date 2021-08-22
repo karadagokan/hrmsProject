@@ -5,13 +5,9 @@ import com.karadag.hrmsProject.business.abstracts.UsersService;
 import com.karadag.hrmsProject.core.concretes.CheckRegisterRullers;
 import com.karadag.hrmsProject.core.concretes.JobSeekerCheckManager;
 import com.karadag.hrmsProject.core.concretes.MernisServiceAdapter;
-import com.karadag.hrmsProject.core.utilities.DataResult;
-import com.karadag.hrmsProject.core.utilities.ErrorResult;
-import com.karadag.hrmsProject.core.utilities.Result;
-import com.karadag.hrmsProject.core.utilities.SuccessDataResult;
-import com.karadag.hrmsProject.core.utilities.SuccessResult;
+import com.karadag.hrmsProject.core.entities.EmailValidation;
+import com.karadag.hrmsProject.core.utilities.*;
 import com.karadag.hrmsProject.dataAccess.abstracts.JobSeekerDao;
-import com.karadag.hrmsProject.entities.concretes.EmailValidation;
 import com.karadag.hrmsProject.entities.concretes.JobSeeker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,47 +17,47 @@ import java.util.List;
 @Service
 public class JobSeekerManager implements JobSeekerService {
 
-	@Autowired
-	UsersService usersService;
+    UsersService usersService;
 
-	JobSeekerDao jobSeekerDao;
+    JobSeekerDao jobSeekerDao;
 
-	@Autowired
-	public JobSeekerManager(JobSeekerDao jobSeekerDao) {
-		this.jobSeekerDao = jobSeekerDao;
-	}
+    @Autowired
+    public JobSeekerManager(JobSeekerDao jobSeekerDao, UsersService usersService) {
+        this.jobSeekerDao = jobSeekerDao;
+        this.usersService = usersService;
+    }
 
-	@Override
-	public DataResult<List<JobSeeker>> getAll() {
-		return new SuccessDataResult<>(jobSeekerDao.findAll(), "İş arayanlar listelendi.");
-	}
+    @Override
+    public DataResult<List<JobSeeker>> getAll() {
+        return new SuccessDataResult<>(jobSeekerDao.findAll(), "İş arayanlar listelendi.");
+    }
 
-	@Override
-	public Result addJobSeeker(JobSeeker jobSeeker) {
+    @Override
+    public Result addJobSeeker(JobSeeker jobSeeker) {
 
-		// Mail adresini denetliyoruz önceden kayıt olmuş mu ?.
-		CheckRegisterRullers checkRegisterRullers = new CheckRegisterRullers();
-		checkRegisterRullers.setUsersList(usersService.getAll());
-		checkRegisterRullers.setEmployeeList(jobSeekerDao.findAll());
+        // Mail adresini denetliyoruz önceden kayıt olmuş mu ?.
+        CheckRegisterRullers checkRegisterRullers = new CheckRegisterRullers();
+        checkRegisterRullers.setUsersList(usersService.getAll());
+        checkRegisterRullers.setJobSeekerList(jobSeekerDao.findAll());
 
-		boolean isContainsMail = checkRegisterRullers.checkUserMail(jobSeeker.getEmail());
-		boolean isContainNationalityId = checkRegisterRullers.checkEmployeeNationalityId(jobSeeker.getNationalityId());
+        boolean isContainsMail = checkRegisterRullers.checkUserMail(jobSeeker.getEmail());
+        boolean isContainNationalityId = checkRegisterRullers.checkEmployeeNationalityId(jobSeeker.getNationalityId());
 
-		JobSeekerCheckManager jobSeekerCheckManager = new JobSeekerCheckManager(new MernisServiceAdapter());
-		
-		boolean checkUser = jobSeekerCheckManager.ifRealPerson(jobSeeker.getNationalityId(),jobSeeker.getFirstName(), jobSeeker.getLastName(),
-				 jobSeeker.getYearOfBirth());
+        JobSeekerCheckManager jobSeekerCheckManager = new JobSeekerCheckManager(new MernisServiceAdapter());
 
-		if (isContainsMail || isContainNationalityId || !checkUser) {
-			System.out.println("Bu kullanıcı kayıtlı lütfen bilgilerinizi kontrol edin.");
-			return new ErrorResult("Kayıt başarısız bilgilerinizi kontrol edin.");
-		}
+        boolean checkUser = jobSeekerCheckManager.ifRealPerson(jobSeeker.getNationalityId(), jobSeeker.getFirstName(), jobSeeker.getLastName(),
+                jobSeeker.getYearOfBirth());
 
-		jobSeeker.setEmailValidation(new EmailValidation());
-		jobSeekerDao.save(jobSeeker);
+        if (isContainsMail || isContainNationalityId || !checkUser) {
+            System.out.println("Bu kullanıcı kayıtlı lütfen bilgilerinizi kontrol edin.");
+            return new ErrorResult("Kayıt başarısız bilgilerinizi kontrol edin.");
+        }
 
-		return new SuccessResult("Başarıyla kayıt oldunuz.");
+        jobSeeker.setEmailValidation(new EmailValidation());
+        jobSeekerDao.save(jobSeeker);
 
-	}
+        return new SuccessResult("Başarıyla kayıt oldunuz.");
+
+    }
 
 }

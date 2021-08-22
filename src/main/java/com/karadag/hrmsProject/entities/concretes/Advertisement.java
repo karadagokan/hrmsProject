@@ -58,7 +58,7 @@ public class Advertisement {
     private Employer employer;
 
     //Bir ilana başvuran cv leri tutacağımız kısım.
-    @ManyToMany//İlki oluşturulacak tablo ismidir. JoinColums dediği 1.sütundur.
+    @ManyToMany//İlk değer oluşturulacak tablo ismidir. JoinColums dediği 1.sütundur.
     @JoinTable(name="advertisementResumes",joinColumns = @JoinColumn(name = "advertisementId"),inverseJoinColumns = @JoinColumn(name = "resumeId"))
     private List<Resume> resumes;
 

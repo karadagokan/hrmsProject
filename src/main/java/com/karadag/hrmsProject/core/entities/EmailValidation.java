@@ -1,4 +1,4 @@
-package com.karadag.hrmsProject.entities.concretes;
+package com.karadag.hrmsProject.core.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +23,7 @@ public class EmailValidation {
     private boolean statusEmailValidation;
 
     @OneToOne
-    @JoinColumn(name="userId")
+    @JoinColumn(name = "userId")
     private Users users;
 
 

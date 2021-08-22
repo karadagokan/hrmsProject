@@ -3,7 +3,7 @@ package com.karadag.hrmsProject.api.controllers;
 import com.karadag.hrmsProject.business.abstracts.AdvertisementService;
 import com.karadag.hrmsProject.core.utilities.DataResult;
 import com.karadag.hrmsProject.core.utilities.Result;
-import com.karadag.hrmsProject.entities.concretes.AdvertisementDetail;
+import com.karadag.hrmsProject.entities.dtos.AdvertisementDetail;
 import com.karadag.hrmsProject.entities.concretes.Advertisement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.karadag.hrmsProject.entities.concretes;
+package com.karadag.hrmsProject.entities.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+//DTOS data transfer object anlamına gelir. Birden fazla tablodan alacağımız şeyleri koyuyoruz.
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
